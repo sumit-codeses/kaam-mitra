@@ -1,0 +1,6 @@
+{
+  "name": "Kaam Sarthi",
+  "description": "Local employment platform connecting skilled and unskilled workers with employers in rural and semi-urban communities. Kaam milega, aasani se.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
