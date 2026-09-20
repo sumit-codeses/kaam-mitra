@@ -107,38 +107,94 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [authModalOpen, setAuthModalOpen] = useState<boolean>(false);
 
   const [workers, setWorkers] = useState<WorkerProfile[]>(() => {
-    const saved = localStorage.getItem('kaam_sarthi_workers');
-    return saved ? JSON.parse(saved) : mockWorkers;
+    try {
+      const saved = localStorage.getItem('kaam_sarthi_workers');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch {
+      // ignore
+    }
+    return mockWorkers;
   });
 
   const [employers, setEmployers] = useState<EmployerProfile[]>(() => {
-    const saved = localStorage.getItem('kaam_sarthi_employers');
-    return saved ? JSON.parse(saved) : mockEmployers;
+    try {
+      const saved = localStorage.getItem('kaam_sarthi_employers');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch {
+      // ignore
+    }
+    return mockEmployers;
   });
 
   const [jobs, setJobs] = useState<Job[]>(() => {
-    const saved = localStorage.getItem('kaam_sarthi_jobs');
-    return saved ? JSON.parse(saved) : mockJobs;
+    try {
+      const saved = localStorage.getItem('kaam_sarthi_jobs');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch {
+      // ignore
+    }
+    return mockJobs;
   });
 
   const [applications, setApplications] = useState<Application[]>(() => {
-    const saved = localStorage.getItem('kaam_sarthi_applications');
-    return saved ? JSON.parse(saved) : mockApplications;
+    try {
+      const saved = localStorage.getItem('kaam_sarthi_applications');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) return parsed;
+      }
+    } catch {
+      // ignore
+    }
+    return mockApplications;
   });
 
   const [notifications, setNotifications] = useState<NotificationItem[]>(() => {
-    const saved = localStorage.getItem('kaam_sarthi_notifications');
-    return saved ? JSON.parse(saved) : mockNotifications;
+    try {
+      const saved = localStorage.getItem('kaam_sarthi_notifications');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) return parsed;
+      }
+    } catch {
+      // ignore
+    }
+    return mockNotifications;
   });
 
   const [complaints, setComplaints] = useState<Complaint[]>(() => {
-    const saved = localStorage.getItem('kaam_sarthi_complaints');
-    return saved ? JSON.parse(saved) : mockComplaints;
+    try {
+      const saved = localStorage.getItem('kaam_sarthi_complaints');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) return parsed;
+      }
+    } catch {
+      // ignore
+    }
+    return mockComplaints;
   });
 
   const [reviews, setReviews] = useState<Review[]>(() => {
-    const saved = localStorage.getItem('kaam_sarthi_reviews');
-    return saved ? JSON.parse(saved) : mockReviews;
+    try {
+      const saved = localStorage.getItem('kaam_sarthi_reviews');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) return parsed;
+      }
+    } catch {
+      // ignore
+    }
+    return mockReviews;
   });
 
   const [savedJobIds, setSavedJobIds] = useState<string[]>(['job-102']);
@@ -185,8 +241,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     localStorage.setItem('kaam_sarthi_notifications', JSON.stringify(notifications));
   }, [notifications]);
 
-  const activeWorker = workers[0]; // Ramesh Kumar
-  const activeEmployer = employers[0]; // Rajesh Sharma
+  const activeWorker = workers[0] || mockWorkers[0]; // Ramesh Kumar
+  const activeEmployer = employers[0] || mockEmployers[0]; // Rajesh Sharma
 
   const setCurrentRole = (role: UserRole) => {
     setCurrentRoleState(role);

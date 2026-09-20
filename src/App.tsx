@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { LanguageProvider } from './i18n/LanguageContext';
 import { AppProvider, useApp } from './context/AppContext';
+import { ErrorBoundary } from './components/common/ErrorBoundary';
 
 // Common Layout & Nav
 import { RoleSwitcherBanner } from './components/common/RoleSwitcherBanner';
@@ -152,10 +153,12 @@ const AppShell: React.FC = () => {
 
 export default function App() {
   return (
-    <LanguageProvider>
-      <AppProvider>
-        <AppShell />
-      </AppProvider>
-    </LanguageProvider>
+    <ErrorBoundary>
+      <LanguageProvider>
+        <AppProvider>
+          <AppShell />
+        </AppProvider>
+      </LanguageProvider>
+    </ErrorBoundary>
   );
 }
